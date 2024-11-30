@@ -1,0 +1,83 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sum of Arguments & Trigonometric Values</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    input, button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .results {
+      margin-top: 20px;
+    }
+    .results p {
+      font-size: 18px;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sum & Trigonometric Values</h1>
+
+    <!-- Input for numbers -->
+    <label for="numbers">Enter numbers to sum (comma-separated):</label>
+    <input type="text" id="numbers" placeholder="e.g., 10, 20, 30">
+
+    <!-- Input for angle -->
+    <label for="angle">Enter an angle in degrees:</label>
+    <input type="number" id="angle" placeholder="e.g., 45">
+
+    <!-- Button to calculate -->
+    <button onclick="calculate()">Calculate</button>
+
+    <!-- Results -->
+    <div class="results" id="results"></div>
+  </div>
+
+  <script>
+    function calculate() {
+      // Get input values
+      const numbersInput = document.getElementById("numbers").value;
+      const angleInput = parseFloat(document.getElementById("angle").value);
+
+      // Validate inputs
+      if (!numbersInput || isNaN(angleInput)) {
+        alert("Please enter valid numbers and angle.");
+        return;
+      }
+
+      // Calculate sum of numbers
+      const numbers = numbersInput.split(',').map(Number);
+      const sum = numbers.reduce((acc, num) => acc + num, 0);
+
+      // Calculate trigonometric values
+      const radians = angleInput * (Math.PI / 180); // Convert to radians
+      const sine = Math.sin(radians).toFixed(4);
+      const cosine = Math.cos(radians).toFixed(4);
+      const tangent = Math.tan(radians).toFixed(4);
+
+      // Display results
+      const resultsDiv = document.getElementById("results");
+      resultsDiv.innerHTML = `
+        <p><strong>Sum of Numbers:</strong> ${sum}</p>
+        <p><strong>Trigonometric Values for ${angleInput}°:</strong></p>
+        <p>Sine: ${sine}</p>
+        <p>Cosine: ${cosine}</p>
+        <p>Tangent: ${tangent}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
